@@ -164,10 +164,17 @@ public class ContactActions {
 
     public int collectOption(){
 
-        System.out.print("\nEnter your option: ");
-        int option = Integer.parseInt(sc.nextLine());
+        int option = 6;
+
+        try {
+            System.out.print("\nEnter your option: ");
+            option = Integer.parseInt(sc.nextLine());
+        } 
+        
+        catch (NumberFormatException e) {
+                       
+        }
 
         return option;
     }
-    
 }
