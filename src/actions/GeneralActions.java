@@ -47,11 +47,11 @@ public class GeneralActions {
     public void printList(){
 
         if (ContactActions.persons.isEmpty()) {
-           System.out.println("There's no contacts.\n");
+           System.out.print("\nThere're no contacts.\n");
         }
 
         if (ContactActions.phones.isEmpty()) {
-            System.out.println("There's no contacts.\n");
+            System.out.print("There're no phone numbers.\n");
         }
 
         else{

@@ -40,9 +40,16 @@ public class Main{
                 case 2: // Remove
                     ga.printList();
                     option = ca.collectOption();
-                    ContactActions.persons.remove(option);
-                    ContactActions.phones.remove(option);
-                    System.out.print("\nContact removed.\n");
+
+                    try {
+                        ContactActions.persons.remove(option);
+                        ContactActions.phones.remove(option);
+                        System.out.print("\nContact removed.\n");
+                    } 
+                    catch (IndexOutOfBoundsException in) {
+                        System.out.print("\nInvalid index. Please, check your option entered.\n");
+                    }
+                    
                     break;
 
                 case 3: // Edit
