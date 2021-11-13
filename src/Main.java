@@ -2,6 +2,7 @@
 
 import actions.ContactActions;
 import actions.GeneralActions;
+import actions.LookForAContact;
 import models.Person;
 import models.Phone;
 
@@ -15,6 +16,7 @@ public class Main{
     public static void main(String[] args) {
         GeneralActions ga = new GeneralActions();
         ContactActions ca = new ContactActions();
+        LookForAContact lf = new LookForAContact();
         Person ps = new Person();
         Phone phone = new Phone();
 
@@ -53,13 +55,22 @@ public class Main{
                     break;
 
                 case 3: // Edit
-                    ga.printList();
-                    option = ca.collectOption();
-                    ca.changeContact(option);
+                    if (ContactActions.persons.isEmpty() || ContactActions.phones.isEmpty()) {
+                        System.out.print("\nThere're no contacts.\nThere're no phone numbers.\n");
+                    }
+                    else{
+                        
+                        ga.printList();
+                        try {
+                            ca.changeContact(ca.collectOption());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.print("\nInvalid index. Please, check your option entered.\n");
+                        }
+                    }
                     break;
 
                 case 4: // Look for
-                    ca.lookForContact();
+                    lf.lookForContact();
                     break;
                 
                 case 5: // Print list
