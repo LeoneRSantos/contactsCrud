@@ -2,6 +2,7 @@ package actions;
 
 import java.util.Scanner;
 
+import exceptions.EmptyListException;
 import models.Person;
 
 
@@ -44,14 +45,17 @@ public class GeneralActions {
 
     // To print the list
 
-    public void printList(){
+    public void printList() throws EmptyListException{
 
-        if (ContactActions.persons.isEmpty()) {
-           System.out.print("\nThere're no contacts.\n");
-        }
+        // if (ContactActions.persons.isEmpty()) {
+        //    System.out.print("\nThere're no contacts.\n");
+        // }
 
-        if (ContactActions.phones.isEmpty()) {
-            System.out.print("There're no phone numbers.\n");
+        // if (ContactActions.phones.isEmpty()) {
+        //     System.out.print("There're no phone numbers.\n");
+        // }
+        if (ContactActions.persons.isEmpty() || ContactActions.phones.isEmpty()) {
+            throw new EmptyListException();
         }
 
         else{

@@ -3,6 +3,7 @@
 import actions.ContactActions;
 import actions.GeneralActions;
 import actions.LookForAContact;
+import exceptions.EmptyListException;
 import models.Person;
 import models.Phone;
 
@@ -12,7 +13,6 @@ import models.Phone;
 
 public class Main{
 
-    
     public static void main(String[] args) {
         GeneralActions ga = new GeneralActions();
         ContactActions ca = new ContactActions();
@@ -36,18 +36,21 @@ public class Main{
                 case 1: // Add
                     ContactActions.persons.add(ps.createPerson());
                     ContactActions.phones.add(phone.createPhone());
-                    System.out.println("\nContact added.\n");
+                    System.out.print("\nContact added.\n");
                     break;
 
                 case 2: // Remove
-                    ga.printList();
-                    option = ca.collectOption();
-
                     try {
+                        ga.printList();
+                        option = ca.collectOption();
+
                         ContactActions.persons.remove(option);
                         ContactActions.phones.remove(option);
                         System.out.print("\nContact removed.\n");
                     } 
+                    catch (EmptyListException e2) {
+                        System.out.print(e2.toString());
+                    }
                     catch (IndexOutOfBoundsException in) {
                         System.out.print("\nInvalid index. Please, check your option entered.\n");
                     }
@@ -55,18 +58,18 @@ public class Main{
                     break;
 
                 case 3: // Edit
-                    if (ContactActions.persons.isEmpty() || ContactActions.phones.isEmpty()) {
-                        System.out.print("\nThere're no contacts.\nThere're no phone numbers.\n");
-                    }
-                    else{
-                        
+                      
+                    try {
                         ga.printList();
-                        try {
-                            ca.changeContact(ca.collectOption());
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.print("\nInvalid index. Please, check your option entered.\n");
-                        }
+                        ca.changeContact(ca.collectOption());
+                    } 
+                    catch (EmptyListException e3) {
+                        System.out.print(e3.toString());
                     }
+                    catch (IndexOutOfBoundsException in3) {
+                        System.out.print("\nInvalid index. Please, check your option entered.\n");
+                    }
+                    
                     break;
 
                 case 4: // Look for
@@ -74,7 +77,13 @@ public class Main{
                     break;
                 
                 case 5: // Print list
-                    ga.printList();
+
+                    try {
+                        ga.printList();
+                    } 
+                    catch (EmptyListException e5) {
+                        System.out.print(e5.toString());
+                    }
                     break;
 
                 default:
