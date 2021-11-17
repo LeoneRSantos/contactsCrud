@@ -1,5 +1,9 @@
 package exceptions;
 
+/** November 13th, 2021
+* @author Leone Rodrigues Santos 
+*/
+
 public class EmptyListException extends Exception{
 
     @Override

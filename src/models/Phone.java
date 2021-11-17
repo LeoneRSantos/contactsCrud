@@ -2,6 +2,8 @@ package models;
 
 import java.util.Scanner;
 
+import exceptions.InvalidDDDException;
+
 /** November 1st, 2021
 * @author Leone Rodrigues Santos 
 */
@@ -51,14 +53,14 @@ public class Phone {
 
     // To collect DDD
 
-    public String receiveDDD(){
+    public String receiveDDD() throws InvalidDDDException{
 
         System.out.print("\nEnter the DDD number: ");
         String currentDDD = scan.nextLine();
 
         if (currentDDD.length() > 3) {
-            System.out.print("\nInvalid DDD, enter only three algarism.\n");
-            currentDDD = " ";
+            throw new InvalidDDDException();
+            
         }
 
         return currentDDD;
@@ -82,7 +84,13 @@ public class Phone {
     // To create a phone number
 
     public Phone createPhone(){
-        String cDDD = receiveDDD();
+        String cDDD = " ";
+        try {
+            cDDD = receiveDDD();
+        } catch (InvalidDDDException iDDD) {
+            
+            System.out.print(iDDD.toString());
+        }
         String cNumber = receiveNumber();
 
         return new Phone(cDDD, cNumber);

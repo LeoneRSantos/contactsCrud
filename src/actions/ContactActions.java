@@ -3,6 +3,7 @@ package actions;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.InvalidDDDException;
 import models.Person;
 import models.Phone;
 
@@ -37,7 +38,7 @@ public class ContactActions {
 
             String newName;
             String newNick;
-            String newDDD;
+            String newDDD = " ";
             String newNumber;
 
         switch (choose) {
@@ -54,7 +55,12 @@ public class ContactActions {
                 break;
             
             case 3:
+            try {
                 newDDD = changePhone.receiveDDD();
+            } catch (InvalidDDDException e3) {
+                
+                System.out.print(e3.toString());
+            }
                 changePhone.setddd(newDDD);
                 System.out.print("\nDone. DDD has been changed.\n");
                 break;
@@ -68,7 +74,12 @@ public class ContactActions {
             case 5:
                 newName = changePerson.receiveName();
                 newNick = changePerson.receiveNick();
+            try {
                 newDDD = changePhone.receiveDDD();
+            } catch (InvalidDDDException e5) {
+                
+                System.out.print(e5.toString());
+            }
                 newNumber = changePhone.receiveNumber();
 
                 changePerson.setName(newName);
