@@ -30,16 +30,16 @@ public class ContactActions {
 
     public void changeContact(int position){
 
-            System.out.print("\nEnter the option which you want edit: \n\n1)Name \n2)Nickname \n3)DDD \n4)Number \n5)All\n");
-            int choose = collectOption();
+        System.out.print("\nEnter the option which you want edit: \n\n1)Name \n2)Nickname \n3)DDD \n4)Number \n5)All\n");
+        int choose = PickUPOption.collectOption();
 
-            Person changePerson = persons.get(position);
-            Phone changePhone = phones.get(position);
+        Person changePerson = persons.get(position);
+        Phone changePhone = phones.get(position);
 
-            String newName;
-            String newNick;
-            String newDDD = " ";
-            String newNumber;
+        String newName;
+        String newNick;
+        String newDDD = " ";
+        String newNumber;
 
         switch (choose) {
             case 1:    // Name
@@ -96,23 +96,5 @@ public class ContactActions {
                 break;
         }
            
-    }
-
-    // To pick up the option
-
-    public int collectOption(){
-
-        int option = 6;
-
-        try {
-            System.out.print("\nEnter your option: ");
-            option = Integer.parseInt(sc.nextLine());
-        } 
-        
-        catch (NumberFormatException e) {
-                       
-        }
-
-        return option;
     }
 }

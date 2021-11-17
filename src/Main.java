@@ -3,6 +3,7 @@
 import actions.ContactActions;
 import actions.GeneralActions;
 import actions.LookForAContact;
+import actions.PickUPOption;
 import exceptions.EmptyListException;
 import models.Person;
 import models.Phone;
@@ -25,7 +26,7 @@ public class Main{
         while (keep) {
             
             GeneralActions.printMenu();
-            int option = ca.collectOption();
+            int option = PickUPOption.collectOption();
 
             switch (option) {
                 
@@ -42,7 +43,7 @@ public class Main{
                 case 2: // Remove
                     try {
                         ga.printList();
-                        option = ca.collectOption();
+                        option = PickUPOption.collectOption();
 
                         ContactActions.persons.remove(option);
                         ContactActions.phones.remove(option);
@@ -61,7 +62,7 @@ public class Main{
                       
                     try {
                         ga.printList();
-                        ca.changeContact(ca.collectOption());
+                        ca.changeContact(PickUPOption.collectOption());
                     } 
                     catch (EmptyListException e3) {
                         System.out.print(e3.toString());
