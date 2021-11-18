@@ -3,6 +3,7 @@ package models;
 import java.util.Scanner;
 
 import exceptions.InvalidDDDException;
+import exceptions.InvalidPhoneNumberException;
 
 /** November 1st, 2021
 * @author Leone Rodrigues Santos 
@@ -68,14 +69,14 @@ public class Phone {
 
     // To collect number
 
-    public String receiveNumber(){
+    public String receiveNumber() throws InvalidPhoneNumberException{
 
         System.out.print("\nEnter the phone number: ");
         String currentNumber = scan.nextLine();
 
         if (currentNumber.length() > 9) {
-            System.out.print("\nNumber invalid, enter only nine algarisms.\n");
-            currentNumber = " ";
+            
+            throw new InvalidPhoneNumberException();
         }
 
         return currentNumber;
@@ -85,13 +86,19 @@ public class Phone {
 
     public Phone createPhone(){
         String cDDD = " ";
+        String cNumber = " ";
+
         try {
             cDDD = receiveDDD();
-        } catch (InvalidDDDException iDDD) {
-            
+            receiveNumber();
+        } 
+        catch (InvalidDDDException iDDD) {      
             System.out.print(iDDD.toString());
         }
-        String cNumber = receiveNumber();
+        catch(InvalidPhoneNumberException ipn){
+            System.out.print(ipn.toString());
+        }
+        
 
         return new Phone(cDDD, cNumber);
     }
